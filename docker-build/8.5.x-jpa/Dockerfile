@@ -7,4 +7,6 @@ ADD javax.j2ee.persistence.jar /opt/IBM/WebSphere/AppServer/plugins/
 RUN mkdir -p /home/was/jar
 ADD javassist-3.18.1-GA.jar /home/was/jar/
 
+VOLUME /data
+
 CMD ["/work/start_server.sh"]
