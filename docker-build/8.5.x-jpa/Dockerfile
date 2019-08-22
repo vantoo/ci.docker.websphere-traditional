@@ -9,6 +9,11 @@ ADD javassist-3.18.1-GA.jar /home/was/jar/
 
 VOLUME /data
 
+ARG USER=was
+ARG GROUP=was
+
+USER root
 RUN chown -R $USER:$GROUP /data
+USER $USER
 
 CMD ["/work/start_server.sh"]
