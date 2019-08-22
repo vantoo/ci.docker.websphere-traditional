@@ -4,7 +4,9 @@ docker build -t idea/was:8.5 .
 #运行镜像，挂载文件目录
 docker run --name was8.5 -v /usr/local/was/PASSWORD:/tmp/PASSWORD \
 -v /usr/tmp/was-data:/data \
--e UPDATE_HOSTNAME=true -p 9043:9043 -p 9443:9443 --restart=always \
+-e UPDATE_HOSTNAME=true \
+-p 9043:9043 -p 9443:9443 -p 9080:9080 \
+--restart=always \
 -d idea/was:8.5
 
 #删除缓存目录
