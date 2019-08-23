@@ -4,9 +4,8 @@ docker build -t idea/was:8.5 .
 #运行镜像，挂载文件目录
 docker run --name was8.5 -v /usr/local/was/PASSWORD:/tmp/PASSWORD \
 -v /usr/tmp/was-data:/data \
--v /usr/tmp/was-war:/opt/IBM/WebSphere/AppServer/profiles/AppSrv01/installedApps/DefaultCell01/ams_war.ear/ams.war \
 -e UPDATE_HOSTNAME=true \
--p 9043:9043 -p 9443:9443 -p 9081:9080 \
+-p 9060:9060 -p 9043:9043 -p 9443:9443 -p 9081:9081 \
 --restart=always \
 -d idea/was:8.5
 
@@ -15,3 +14,4 @@ docker exec was8.5 bash -c "rm -rf /opt/IBM/WebSphere/AppServer/profiles/AppSrv0
 
 #war目录
 /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/installedApps/DefaultCell01/ams_war.ear/ams.war
+
