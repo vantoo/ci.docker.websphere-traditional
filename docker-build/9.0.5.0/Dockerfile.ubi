@@ -19,6 +19,8 @@
 FROM registry.access.redhat.com/ubi7/ubi as builder
 RUN yum makecache fast && yum update -y && yum install -y openssl wget unzip
 
+RUN echo 'LANG="zh_CN.UTF-8"' > /etc/sysconfig/i18n
+
 ARG IMURL
 ARG IBMID
 ARG IBMID_PWD
@@ -42,6 +44,7 @@ RUN mkdir /work && cd /work && wget $IMURL \
     -installFixes $IFIXES -sRD /opt/IBM/WebSphere/AppServerIMShared \
     -dataLocation /opt/IBM/WebSphere/AppServerIMData \
     -secureStorageFile /tmp/secureStore -masterPasswordFile /tmp/secureStorePwd \
+    -properties cic.selector.nl=zh \
     -preferences offering.service.repositories.areUsed=false,\
 com.ibm.cic.common.core.preferences.searchForUpdates=true,\
 com.ibm.cic.common.core.preferences.preserveDownloadedArtifacts=false,\

@@ -17,7 +17,9 @@
 
 # Build step - download and install tWAS
 FROM ubuntu:16.04 as builder
-RUN apt-get update && apt-get install -y openssl wget unzip
+RUN apt-get update && apt-get install -y openssl wget unzip locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i zh_CN -c -f UTF-8 -A /usr/share/locale/locale.alias zh_CN.UTF-8
+ENV LANG zh_CN.utf8
 
 ARG IMURL
 ARG IBMID
@@ -42,6 +44,7 @@ RUN mkdir /work && cd /work && wget $IMURL \
     -installFixes $IFIXES -sRD /opt/IBM/WebSphere/AppServerIMShared \
     -dataLocation /opt/IBM/WebSphere/AppServerIMData \
     -secureStorageFile /tmp/secureStore -masterPasswordFile /tmp/secureStorePwd \
+    -properties cic.selector.nl=zh \
     -preferences offering.service.repositories.areUsed=false,\
 com.ibm.cic.common.core.preferences.searchForUpdates=true,\
 com.ibm.cic.common.core.preferences.preserveDownloadedArtifacts=false,\
